@@ -291,21 +291,22 @@
 )
 
 ; Resize fringes
-(defun resize-fringes (&optional arg)
+(defun resize-fringes (&optional arg &optional ts)
   (interactive "P")
   (if (equal arg 0)
     (progn ; if true
       (set-window-fringes (selected-window) 0 0 1)
     )
     (progn ; if false
-      ; 83: 80 text wide, 2 (left and right) text to border and 1 to new line
-      ; white character
-      (let ((fringe-size (/ (- (frame-pixel-width) (* 83 (frame-char-width))) 2)))
+      (if (equal ts nil) (setq ts 80)) ;default text width
+      ; plus 3 for: 2 (left and right) text to border and 1 to new line white character
+      (let ((fringe-size (/ (- (frame-pixel-width) (* (+ 3 ts) (frame-char-width))) 2)))
         (set-window-fringes (selected-window) fringe-size fringe-size 1)
       )
     )
   )
 )
+
 
 ; Bells and whistles (distraction free)
 (defvar-local naked-status 0)
