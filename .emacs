@@ -203,7 +203,10 @@
   ; Autocomplete
   (setq ess-tab-complete-in-script t)
   (setq ess-use-auto-complete 'script-only)
-  ;(auto-complete-mode)
+  (setq ac-use-quick-help nil) ; Not use quick help
+  (setq ac-auto-start nil) ; Disable automatically completation
+  (define-key ac-mode-map "\M-/" 'auto-complete) ; Key to autocomplete
+  (auto-complete-mode)
   
   ; Key map
   (local-set-key (kbd "C-<return>") 'ess-eval-line-and-step)
@@ -264,6 +267,28 @@
 ; Load Pandoc package
 (add-to-list 'load-path "~/.emacs.d/pkgs/pandoc/")
 (autoload 'pandoc-mode "pandoc-mode" "Pandoc" t)
+
+
+;;; Fix bug
+; AUCTeX
+(require 'font-latex)
+(defun font-latex-jit-lock-force-redisplay (buf start end)
+  "Compatibility for Emacsen not offering `jit-lock-force-redisplay'."
+      ;; The following block is an expansion of `jit-lock-force-redisplay'
+      ;; and involved macros taken from CVS Emacs on 2007-04-28.
+      (with-current-buffer buf
+        (let ((modified (buffer-modified-p)))
+          (unwind-protect
+          (let ((buffer-undo-list t)
+            (inhibit-read-only t)
+            (inhibit-point-motion-hooks t)
+            (inhibit-modification-hooks t)
+            deactivate-mark
+            buffer-file-name
+            buffer-file-truename)
+            (put-text-property start end 'fontified t))
+        (unless modified
+          (restore-buffer-modified-p nil))))))
 
 
 ;;; Functions
