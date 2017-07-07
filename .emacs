@@ -184,6 +184,19 @@
   )
 )
 
+; Markdown mode
+(add-hook 'markdown-mode-hook
+  (lambda()
+  ; RefTeX
+  (reftex-mode)
+  ; RefTeX citation format
+  (eval-after-load 'reftex-vars
+    '(progn 
+     (setq reftex-cite-format '((?\C-m . "@%l")
+                                (?p . "[@%l]")))))
+  )
+)
+
 ; ess-mode
 (add-hook 'ess-mode-hook
   (lambda()
@@ -295,25 +308,73 @@
 ;;; ---------
 
 ; Start ESS preferences
-(defun ess-start-R ()
-  (interactive)
+(defun ess-start-R (&optional arg)
+  (interactive "P")
   (if (not (member "*R*" (mapcar (function buffer-name) (buffer-list))))
     (progn
       (delete-other-windows)
       (setq winCod (selected-window))
       (setq bufCod (buffer-name))
-      (setq winR (split-window winCod (floor (* 0.83 (window-height)))))
-      
+      (if (equal arg nil)
+        (progn
+          (setq winR (split-window-below (floor (* 0.83 (window-height)))))
+        )
+        (progn
+          (setq winR (split-window-right))
+        )
+      )
       (other-window 1) ; go to new window
       (R) ; start R
       (set-window-buffer winR "*R*") ; set R buffer to R window
-      (resize-fringes 0) ; remove fringe fom R window
+      (resize-fringes 0) ; remove fringe from R window
+      (set-window-dedicated-p winR 1)
 
       (other-window -1) ; back to main window
       (set-window-buffer winCod bufCod) ; set Code buffer to Code window
     )
   )
 )
+
+; Split window with code and R
+(defun ess-split-window-R (&optional arg)
+  (interactive "P")
+  (setq winCod (selected-window))
+  (setq bufCod (buffer-name))
+
+  (if (equal arg nil)
+    (progn
+      (setq winR (split-window-below (floor (* 0.83 (window-height)))))
+     )
+    (progn
+      (setq winR (split-window-right))
+    )
+  )
+  (other-window 1)
+  (switch-to-buffer "*R*")
+  (resize-fringes 0)
+  (set-window-dedicated-p winCod 1)
+
+  (other-window -1)
+  (switch-to-buffer bufCod)
+)
+
+; Set window with dedicated buffer
+(defun toggle-window-dedicated ()
+  "Define or undefine selected window as dedicated"
+  (interactive)
+  (setq window (selected-window))
+  (if (equal (window-dedicated-p window) nil)
+    (progn 
+      (set-window-dedicated-p window 1)
+      (message "Now, window is dedicated")
+    )
+    (progn
+      (set-window-dedicated-p window nil)
+      (message "Now, window is not dedicated")
+    )
+  )
+)
+(global-set-key (kbd "C-c t") 'toggle-window-dedicated)
 
 ; Resize fringes
 (defun resize-fringes (&optional arg &optional ts)
