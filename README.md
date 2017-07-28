@@ -1,4 +1,4 @@
 ### dotfiles
 
-My linux dotfiles
+My GNU/Linux dotfiles
 
