@@ -1,3 +1,5 @@
+; Running in Emacs 25
+
 ;;; Environment settings
 ;;; --------------------
 
@@ -106,7 +108,6 @@
 
 ; Setting themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;(load-theme 'zenburn t)
 (load-theme 'github t)
 
 
@@ -143,19 +144,19 @@
   (flyspell-mode)
   ; Active fringes
   (fringe-mode 1)
-  ; Load theme
-  ;(load-theme 'github t)
   )
 )
 
 ; TeX-mode
 (add-hook 'TeX-mode-hook
   (lambda()
+  ;; AUCTeX
   ; Enable parse on load
   (setq TeX-parse-self t)
   ; Enable parse on save
   (setq TeX-auto-save t)
   (setq-default TeX-master nil)
+  
   ; PDF mode (rather than DVI)
   (setq TeX-PDF-mode t)
   ; Disable auto-fill
@@ -241,13 +242,11 @@
 ; Packages installer
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 ;; R
 (require 'ess-site)
-; Show functions arguments
-;(require 'ess-eldoc)
 (require 'auto-complete)
 
 ;; Git
@@ -255,17 +254,7 @@
 (require 'magit)
 
 ;; Markdown
-; Load Markdown package
-;(add-to-list 'load-path "~/.emacs.d/pkgs/markdonw/")
-; Enable Markdown mode
-;(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
-;(add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
-
-;; R Markdown
 ; Load R Markdown package (polymode)
-(setq load-path
-  (append '("~/.emacs.d/pkgs/polymode/"  "~/.emacs.d/pkgs/polymode/modes/")
-            load-path))
 (require 'poly-R)
 (require 'poly-markdown)
 ; Enable R Markdown mode
@@ -278,30 +267,7 @@
 
 ;; Pandoc
 ; Load Pandoc package
-(add-to-list 'load-path "~/.emacs.d/pkgs/pandoc/")
 (autoload 'pandoc-mode "pandoc-mode" "Pandoc" t)
-
-
-;;; Fix bug
-; AUCTeX
-(require 'font-latex)
-(defun font-latex-jit-lock-force-redisplay (buf start end)
-  "Compatibility for Emacsen not offering `jit-lock-force-redisplay'."
-      ;; The following block is an expansion of `jit-lock-force-redisplay'
-      ;; and involved macros taken from CVS Emacs on 2007-04-28.
-      (with-current-buffer buf
-        (let ((modified (buffer-modified-p)))
-          (unwind-protect
-          (let ((buffer-undo-list t)
-            (inhibit-read-only t)
-            (inhibit-point-motion-hooks t)
-            (inhibit-modification-hooks t)
-            deactivate-mark
-            buffer-file-name
-            buffer-file-truename)
-            (put-text-property start end 'fontified t))
-        (unless modified
-          (restore-buffer-modified-p nil))))))
 
 
 ;;; Functions
@@ -415,5 +381,4 @@
   )
 )
 (global-set-key [f11] 'toggle-fullscreen)
-
 
