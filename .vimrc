@@ -7,7 +7,7 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin('~/.vim/plugin/')
+call vundle#begin()
 
 " Start plugins
 
@@ -84,12 +84,17 @@ set showmode
 " Visual bell
 set visualbell
 
-" Wrap line
-" set nowrap
-set wrap
+" Soft wrap line
+set wrap linebreak nolist
+
+" Show soft break line
+set showbreak=+
+
+" Show column limit
+set colorcolumn=80
 
 " Spell check
-autocmd BufNewFile,BufFilePre,BufRead *.{txt,md,markdown,Rmd} setlocal spell spelllang=en_gb
+autocmd BufNewFile,BufFilePre,BufRead *.{txt,md,markdown,Rmd} setlocal spell spelllang=en_gb 
 
 " No show mode
 set noshowmode
@@ -122,12 +127,12 @@ hi User3 ctermbg=238 ctermfg=15 cterm=none
 hi User4 ctermbg=236 ctermfg=15 cterm=none
 set statusline=%1*\ %{toupper(g:currentmode[mode()])}\ 
 set statusline+=%2*\ %f\%h%w%m%r\  " File name and flags
-set statusline+=%3*\ spell:%{&spelllang}\  
+set statusline+=%3*\ %{&spelllang}\  
 set statusline+=%4*
 set statusline+=%= " To right
-set statusline+=\ %{&ff}\ \|\ %{strlen(&fenc)?&fenc:&enc}%{(&bomb?\",BOM\":\"\")}\ \|\ %y " File format and encoding
-set statusline+=\ \|\ %c:%l\  " Column, line number
-set statusline+=%3*\ %P\  " Porcentage
+set statusline+=\ %{&ff}\ \|\ %{strlen(&fenc)?&fenc:&enc}%{(&bomb?\",BOM\":\"\")}\ \|\ %y\  " File format and encoding
+set statusline+=%3*\ %c:%l\  " Column, line number
+set statusline+=%2*\ %P\  " Porcentage
 
 " Always display the status line, even if only one window is displayed
 set laststatus=2
