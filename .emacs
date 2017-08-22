@@ -380,4 +380,8 @@
 )
 (global-set-key [f11] 'toggle-fullscreen)
 
+;;; Custom variables (track installed packages)
+(setq custom-file "~/.emacs.d/custom_variables.el")
+(load custom-file)
+
 
