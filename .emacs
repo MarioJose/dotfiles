@@ -125,7 +125,7 @@
   (setq-local comment-auto-fill-only-comments t)
   (auto-fill-mode)
   ; Whitespace
-  (setq whitespace-style '(newline newline-mark))
+  (setq whitespace-style '(tabs tab-mark newline newline-mark))
   (whitespace-mode)
   )
 )
@@ -253,13 +253,11 @@
 (require 'git)
 (require 'magit)
 
-;; Markdown
+;; Markdown and R Markdown
 ; Load R Markdown package (polymode)
 (require 'poly-R)
 (require 'poly-markdown)
-; Enable R Markdown mode
-(autoload 'poly-markdown-mode "poly-markdown-mode" "Major mode for editing R-Markdown files" t)
-; R modes
+; Auto mode
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
 (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
@@ -381,4 +379,5 @@
   )
 )
 (global-set-key [f11] 'toggle-fullscreen)
+
 
