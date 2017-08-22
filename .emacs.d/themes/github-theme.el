@@ -1167,7 +1167,7 @@ Also bind `class' to ((class color) (min-colors 89))."
 ;;;;; whitespace-mode
    `(whitespace-space ((t (:background ,github-white :foreground ,github-white-1))))
    `(whitespace-hspace ((t (:background ,github-white :foreground ,github-white-1))))
-   `(whitespace-tab ((t (:background ,github-comment))))
+   `(whitespace-tab ((t (:background ,github-white :foreground ,github-white-1))))
    `(whitespace-newline ((t (:foreground ,github-white-1))))
    `(whitespace-trailing ((t (:background ,github-string))))
    `(whitespace-line ((t (:background ,github-white :foreground ,github-comment))))
