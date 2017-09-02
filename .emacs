@@ -21,13 +21,17 @@
 (set-face-attribute 'mode-line nil :font "Source Code Pro-10")
 (set-face-attribute 'mode-line-inactive nil :font "Source Code Pro-10")
 
-; Frame (GUI window) position
-; Width: 80 text wide, 2 (left and right) text to border and 1 to new line
-; white character. Total: 93
+; Frame (GUI window) size and position
+; Width: 80 text wide, 2 (left and right) text for border, 1 for new line white
+; character and 10 for fringies. Total: 93
+; Size
+(add-to-list 'initial-frame-alist '(width . 93))
+(add-to-list 'initial-frame-alist '(fullheight))
 (add-to-list 'default-frame-alist '(width . 93))
-(add-to-list 'default-frame-alist '(top . 25))
-(add-to-list 'default-frame-alist '(left . 0))
-;(add-to-list 'default-frame-alist '(height . 60))
+(add-to-list 'default-frame-alist '(fullheight))
+; Position
+;(add-to-list 'initial-frame-alist '(left . 0))
+;(add-to-list 'initial-frame-alist '(top . 25))
 
 ; Window (frame) position
 (setq centered t)
@@ -356,6 +360,7 @@
     )
   )
 )
+(global-set-key (kbd "C-c r f") 'resize-fringes)
 
 
 ; Bells and whistles (distraction free)
