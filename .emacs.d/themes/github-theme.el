@@ -89,7 +89,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(default ((t (:foreground ,github-text :background ,github-white))))
    `(cursor ((t (:foreground ,github-text :background ,github-text))))
    `(escape-glyph ((t (:foreground ,github-keyword :bold t))))
-   `(fringe ((t (:foreground ,github-text :background ,github-white-1))))
+   `(fringe ((t (:foreground ,github-comment :background ,github-white-1))))
    `(header-line ((t (:foreground ,github-keyword
                                   :background ,github-selection
                                   :box (:line-width -1 :style released-button)))))
