@@ -202,6 +202,14 @@
   )
 )
 
+; python-mode
+(add-hook 'python-mode-hook
+  (lambda()
+  (setq elpy-rpc-python-command "python3")
+  (setq python-shell-interpreter "python3")
+  )
+)
+
 ; ess-mode
 (add-hook 'ess-mode-hook
   (lambda()
@@ -243,15 +251,23 @@
 ;;; Load packages
 ;;; ------------
 
-; Packages installer
+;; Packages installer
 (require 'package)
+; Package repository
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
+; Python integration
+(add-to-list 'package-archives
+             '("elpy" . "https://jorgenschaefer.github.io/packages/"))
+; Initialize packages
 (package-initialize)
 
 ;; R
 (require 'ess-site)
 (require 'auto-complete)
+
+;; Phyton
+(elpy-enable)
 
 ;; Git
 (require 'git)
