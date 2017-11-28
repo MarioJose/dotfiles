@@ -79,6 +79,9 @@
 ; Point jump to the end of the buffer
 (setq comint-move-point-for-output t)
 
+; Keep window size when autocomplete window is opened and destroied
+(setq window-combination-resize t)
+
 
 ;;; Text editing
 ;;; ------------
@@ -117,6 +120,14 @@
 
 ;;; Customize hooks
 ;;; ---------------
+
+; markup Rd-mode
+(add-hook 'Rd-mode-hook
+  (lambda ()
+  ; Line spacing
+  (setq line-spacing 0.25)
+  )
+)
 
 ; prog-mode
 (add-hook 'prog-mode-hook 
@@ -198,7 +209,9 @@
   (eval-after-load 'reftex-vars
     '(progn 
      (setq reftex-cite-format '((?\C-m . "@%l")
-                                (?p . "[@%l]")))))
+                                (?p . "[@%l]")))
+     (setq reftex-cite-key-separator "; @")
+     ))
   )
 )
 
