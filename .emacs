@@ -121,14 +121,6 @@
 ;;; Customize hooks
 ;;; ---------------
 
-; markup Rd-mode
-(add-hook 'Rd-mode-hook
-  (lambda ()
-  ; Line spacing
-  (setq line-spacing 0.25)
-  )
-)
-
 ; prog-mode
 (add-hook 'prog-mode-hook 
   (lambda () 
@@ -257,6 +249,15 @@
   (custom-set-variables '(current-language-environment "UTF-8"))
 
   (run-hooks 'prog-mode-hook)
+  )
+)
+
+; markup Rd-mode
+(add-hook 'Rd-mode-hook
+  (lambda ()
+  (run-hooks 'text-mode-hook)
+  ; Auto fill
+  (auto-fill-mode 0)
   )
 )
 
