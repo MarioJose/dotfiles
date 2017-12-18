@@ -201,7 +201,9 @@
   (eval-after-load 'reftex-vars
     '(progn 
      (setq reftex-cite-format '((?\C-m . "@%l")
-                                (?p . "[@%l]")))
+                                (?p . "[@%l]")
+                                (?t . "@%l")
+                                (?y . "[-@%l]")))
      (setq reftex-cite-key-separator "; @")
      ))
   )
