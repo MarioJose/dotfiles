@@ -256,7 +256,7 @@
 
 ; markup Rd-mode
 (add-hook 'Rd-mode-hook
-  (lambda ()
+  (lambda()
   (run-hooks 'text-mode-hook)
   ; Auto fill
   (auto-fill-mode 0)
@@ -298,6 +298,9 @@
 (add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
 (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
 (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+
+; Auto mode to C for Arduino source
+(add-to-list 'auto-mode-alist '("\\.ino" . c-mode))
 
 ;; Pandoc
 ; Load Pandoc package
