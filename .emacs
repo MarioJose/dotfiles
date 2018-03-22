@@ -272,9 +272,6 @@
 ; Package repository
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
-; Python integration
-(add-to-list 'package-archives
-             '("elpy" . "https://jorgenschaefer.github.io/packages/"))
 ; Initialize packages
 (package-initialize)
 
@@ -299,8 +296,8 @@
 (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
 (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
 
-; Auto mode to C for Arduino source
-(add-to-list 'auto-mode-alist '("\\.ino" . c-mode))
+; Arduino mode
+(add-to-list 'auto-mode-alist '("\\.ino" . arduino-mode))
 
 ;; Pandoc
 ; Load Pandoc package
